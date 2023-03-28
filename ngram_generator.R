@@ -8,7 +8,7 @@ pacman::p_load(
 N = 3
 
 #Clean the text after saving.
-text <- read_file("output.txt") |>
+text <- read_file("R_Outputs/output.txt") |>
   gsub(
     pattern = "\r\r\n", replacement = "\r\n " #Remove the double newline characters
   ) |>
@@ -69,5 +69,5 @@ colnames(n_grams) <- c(
 )
 
 
-write_csv(n_grams, "output_ngrams.csv")
+write_csv(n_grams, "R_outputs/output_ngrams.csv")
 
