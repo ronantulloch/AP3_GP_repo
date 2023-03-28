@@ -5,10 +5,13 @@ pacman::p_load(
 )
 
 # Set the N for N-grams
-N = 2
+N = 3
 
 #Clean the text after saving.
 text <- read_file("output.txt") |>
+  gsub(
+    pattern = "\r\r\n", replacement = "\r\n " #Remove the double newline characters
+  ) |>
   strsplit( split = "\r\n")
 
 # Place into a dataframe
@@ -16,10 +19,10 @@ text <- text[[1]] |>
   tibble()
 colnames(text) = "text"
 
-# Tokenize the words in the text into ngrams
-unigrams <- text |>
-  unnest_tokens(words, text, token = "words", to_lower = FALSE) |>
-  count(words)
+# Tokenize the words in the text into (n-1)grams
+prev_ngrams <- text |>
+  unnest_tokens(ngrams, text, token = "ngrams", n = N - 1, to_lower = FALSE) |>
+  count(ngrams)
 
 # Tokenize the words in the text into ngrams
 n_grams <- text |>
@@ -27,43 +30,42 @@ n_grams <- text |>
   count(ngrams)
 
 # Seperate the individual words.
-seps <- strsplit(as.character(n_grams$ngrams), split = " ") |>
+seps <- strsplit(as.character(n_grams$ngrams), " ") |>
   as.data.frame() |>
   t() |>
   as.data.frame()
 rownames(seps) <- c(1:dim(n_grams)[1])
 colnames(seps)[dim(seps)[2]] <- "final"
 
-# Output the data frame
-n_grams <- tibble(n_grams, seps)
+# Get the first/last (n-1)gram and final word.
+if(N != 2){
+  start_ngrams <- unite(seps[, 1:(dim(seps)[2] - 1)], col = "start", sep = " ")
+  end_ngrams <- unite(seps[, 2:(dim(seps)[2])], col = "final", sep = " ")
+} else{
+  start_ngrams <- seps[,1] |> tibble()
+  end_ngrams <- seps[,2] |> tibble()
+}
+
+# Group the data frame.
+n_grams <- tibble(n_grams, start_ngrams, end_ngrams, final_word = seps$final)
+colnames(n_grams)[dim(n_grams)[2] - 1] <- "final"
 
 # Add the counters of the final words.
 n_grams <- left_join(
   n_grams,
-  unigrams,
+  prev_ngrams,
   by = join_by(
-    final == words
+    final == ngrams
   )
 )
-n_grams <- n_grams |>
-  add_column(
-    final_word = n_grams$final,
-    .after = 2 + N
-  ) |>
-  add_column(
-    id = 1:dim(n_grams)[1],
-    .before = 1
-  )
 
 colnames(n_grams) <- c(
-  "id",
   paste(N, "_gram", sep = ""),
   paste("num_", N, "_gram", sep = ""),
-  c(
-    paste("word_", 1:N)
-  ),
-  "final_word",
-  "num_final_word"
+  "start_ngram",
+  "end_ngram",
+  "final word",
+  "num_end_ngram"
 )
 
 

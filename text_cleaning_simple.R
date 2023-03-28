@@ -9,18 +9,27 @@ pacman::p_load(
 
 text <- read_file("Raw_Text/Sylvia Plath Poems - Small.txt") |>
   gsub(
+    pattern = "- ", replacement = "" #Remove the double newline characters
+  ) |>
+  gsub(
     pattern = "\r\n\r\n", replacement = "\r\n " #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "\r\n", replacement = "ENDLINE\r\nNEWLINE" #Remove the double newline characters
+    pattern = "\r\n", replacement = " ENDLINE NEWLINE " #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "ENDLINE\r\nNEWLINE@ENDLINE\r\nNEWLINE", replacement = "FINAL\r\nSTART" #Remove the double newline characters
+    pattern = "ENDLINE NEWLINE @ ENDLINE NEWLINE", replacement = "FINAL\r\nSTART" #Remove the double newline characters
+  ) |>
+  gsub(
+    pattern = "-", replacement = " " #Remove the double newline characters
+  ) |>
+  gsub(
+    pattern = "--", replacement = " " #Remove the double newline characters
   ) |>
   removePunctuation(
-    preserve_intra_word_contractions = TRUE,
-    preserve_intra_word_dashes = TRUE,
-    ucp = TRUE
+    preserve_intra_word_contractions = FALSE,
+    preserve_intra_word_dashes = FALSE,
+    ucp = FALSE
   ) |> #Remove the punctuation
   gsub(
     pattern = "  ", replacement = "" # Remove the tabs
@@ -53,6 +62,15 @@ text <- read_file("Raw_Text/Sylvia Plath Poems - Small.txt") |>
   ) |>
   gsub(
     pattern = "  ", replacement = " " #Add starting states.
+  ) |>
+  gsub(
+    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", replacement = "ENDLINE NEWLINE" #Remove the double newline characters
+  ) |>
+  gsub(
+    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", replacement = "ENDLINE NEWLINE" #Remove the double newline characters
+  ) |>
+  gsub(
+    pattern = "START  ENDLINE NEWLINE", replacement = "START" #Remove the double newline characters
   )
 
 

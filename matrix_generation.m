@@ -5,22 +5,19 @@ ngrams = ngrams(2:end, :); %Remove the headers that aren't needed
 % Get the number of ngrams.
 N = size(ngrams, 1);
 
-% Get the reference text
-ref_text = fileread("output.txt");
-
 % Initialise the transition matrix.
 P = zeros(N);
 
 for row = 1:N
 	for col = 1:N
 		% Get the count of the next ngram and the first word of the ngram.
-		next_ngram_count = ngrams{col, 3};
-		next_ngram_first = string(ngrams{col, 4});
+		next_ngram_count = ngrams{col, 2};
+		next_ngram_first = string(ngrams{col, 3});
 
 		% Get the last of the next ngram and the count of the last of the
 		% next ngram.
-		current_ngram_last = string(ngrams{row, end - 1});
-		current_ngram_last_count = ngrams{row, end};
+		current_ngram_last = string(ngrams{row, 4});
+		current_ngram_last_count = ngrams{row, 6};
 
 		% If the ngrams are related then calculate the probability.
 		if next_ngram_first == current_ngram_last
@@ -33,39 +30,40 @@ end
 % distribution.
 end_new_col = zeros(N+1, 1);
 end_new_row = zeros(1, N);
-p_0 = zeros(1, N);
+p_0 = zeros(1, N );
 count_newline = 0;
 count_start = 0;
 
 % Calculate column transitions.
 for row = 1:N
-	if sum(P(row, :)) ~= 1
-		end_new_col(row) = 1;
-	end
+	% if round(sum(P(row, :)), 15) ~= 1
+	% 	end_new_col(row) = 1;
+	% end
+	% 
+	% if contains(string(ngrams{row, 3}), "NEWLINE")
+	% 	count_newline = count_newline + ngrams{row, 2};
+	% end
 
-	if  string(ngrams{row, 4}) == "NEWLINE"
-		count_newline = count_newline +1;
-	end
-
-	if  string(ngrams{row, 4}) == "START"
-		count_start = count_start +1;
+	if contains(string(ngrams{row, 3}), "START")
+		count_start = count_start + ngrams{row, 2};
 	end
 	
 end
 
 % Calculate row transitions
 for row = 1:N
-	if string(ngrams{row, 4}) == "NEWLINE"
-		end_new_row(row) = ngrams{row, 3}/count_newline;
-	end
+	% if contains(string(ngrams{row, 3}), "NEWLINE")
+	% 	end_new_row(row) = ngrams{row, 2}/count_newline;
+	% end
 
-	if string(ngrams{row, 4}) == "START"
-		p_0(row) = ngrams{row, 3}/count_start;
+	if contains(string(ngrams{row, 3}), "START")
+		p_0(row) = ngrams{row, 2}/count_start;
 	end
 end
 
 % Add these values to P
-P = [P ; end_new_row]; P = [P, end_new_col];
+% P = [P ; end_new_row]; P = [P, end_new_col];
 
-
-writematrix(P, "P.csv")
+save("ngrams.mat", "ngrams")
+save("P.mat", "P")
+save("p_0.mat", "p_0")
