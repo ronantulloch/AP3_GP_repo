@@ -1,5 +1,5 @@
 % Read in the ngrams data frame
-ngrams = readcell("output_ngrams.csv");
+ngrams = readcell("R_Outputs/output_ngrams.csv");
 ngrams = ngrams(2:end, :); %Remove the headers that aren't needed
 
 % Get the number of ngrams.
@@ -64,6 +64,6 @@ end
 % Add these values to P
 % P = [P ; end_new_row]; P = [P, end_new_col];
 
-save("ngrams.mat", "ngrams")
-save("P.mat", "P")
-save("p_0.mat", "p_0")
+save("Matlab_Outputs/ngrams.mat", "ngrams")
+save("Matlab_Outputs/P.mat", "P")
+save("Matlab_Outputs/p_0.mat", "p_0")

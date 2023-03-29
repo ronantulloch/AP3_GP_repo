@@ -1,9 +1,9 @@
 % This file will use the stochastic matrix generated as a csv and will use
 % it to generate text.
 
-ngrams = load("ngrams.mat"); ngrams = ngrams.ngrams;
-P = load("P.mat"); P = P.P;
-p_0 = load("p_0.mat"); p_0 = p_0.p_0;
+ngrams = load("Matlab_Outputs/ngrams.mat"); ngrams = ngrams.ngrams;
+P = load("Matlab_Outputs/P.mat"); P = P.P;
+p_0 = load("Matlab_Outputs/ p_0.mat"); p_0 = p_0.p_0;
 
 N = length(p_0);
 rng("shuffle")
