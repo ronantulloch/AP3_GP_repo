@@ -5,7 +5,7 @@ pacman::p_load(
 )
 
 # Set the N for N-grams
-N = 3
+N = 2
 
 #Clean the text after saving.
 text <- read_file("R_Outputs/output.txt") |>

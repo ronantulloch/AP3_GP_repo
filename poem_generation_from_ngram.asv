@@ -3,7 +3,7 @@
 
 ngrams = load("Matlab_Outputs/ngrams.mat"); ngrams = ngrams.ngrams;
 P = load("Matlab_Outputs/P.mat"); P = P.P;
-p_0 = load("Matlab_Outputs/p_0.mat"); p_0 = p_0.p_0;
+p_0 = load("Matlab_Outputs/ p_0.mat"); p_0 = p_0.p_0;
 
 N = length(p_0);
 rng("shuffle")
@@ -18,11 +18,12 @@ ngrams{N, end - 1} = 'NEWLINE';
 phrase = "";
 starting_word_index = randsample(N, 1, true, p_0);
 
+
+
 starting_phrase =  string(ngrams{starting_word_index, 1});
 phrase = phrase + starting_phrase;
 final = false;
 old_word_index = starting_word_index;
-
 while final == false
 	
 	new_word_index = randsample(N, 1, true, P(old_word_index, :));
@@ -41,13 +42,12 @@ while final == false
 
 end
 
-
 % Clean up the text.
 phrase = replace(phrase, " ENDLINE NEWLINE ", "\n");
 phrase = replace(phrase, "ENDLINE NEWLINE", "");
 phrase = replace(phrase, "NEWLINE", "");
 phrase = replace(phrase, "  ", " ");
 phrase = replace(phrase, "START ", "");
-phrase = replace(phrase, "\nFINAL\n", ".\n");
+phrase = replace(phrase, " FINAL", ".");
 clc
 fprintf(phrase)

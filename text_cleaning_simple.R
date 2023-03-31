@@ -12,13 +12,16 @@ text <- read_file("Raw_Text_Input/Sylvia Plath Poems - Small.txt") |>
     pattern = "- ", replacement = "" #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "\r\n\r\n", replacement = "\r\n " #Remove the double newline characters
+    pattern = "\r\n\r\n", 
+    replacement = "\r\n " #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "\r\n", replacement = " ENDLINE NEWLINE " #Remove the double newline characters
+    pattern = "\r\n", 
+    replacement = " ENDLINE NEWLINE " #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "ENDLINE NEWLINE @ ENDLINE NEWLINE", replacement = "FINAL\r\nSTART" #Remove the double newline characters
+    pattern = "ENDLINE NEWLINE @ ENDLINE NEWLINE", 
+    replacement = "FINAL\r\nSTART" #Remove the double newline characters
   ) |>
   gsub(
     pattern = "-", replacement = " " #Remove the double newline characters
@@ -64,13 +67,16 @@ text <- read_file("Raw_Text_Input/Sylvia Plath Poems - Small.txt") |>
     pattern = "  ", replacement = " " #Add starting states.
   ) |>
   gsub(
-    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", replacement = "ENDLINE NEWLINE" #Remove the double newline characters
+    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", 
+    replacement = "ENDLINE NEWLINE" #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", replacement = "ENDLINE NEWLINE" #Remove the double newline characters
+    pattern = "ENDLINE NEWLINE  ENDLINE NEWLINE", 
+    replacement = "ENDLINE NEWLINE" #Remove the double newline characters
   ) |>
   gsub(
-    pattern = "START  ENDLINE NEWLINE", replacement = "START" #Remove the double newline characters
+    pattern = "START  ENDLINE NEWLINE", 
+    replacement = "START" #Remove the double newline characters
   )
 
 
