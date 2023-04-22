@@ -38,7 +38,7 @@ rownames(seps) <- c(1:dim(n_grams)[1])
 colnames(seps)[dim(seps)[2]] <- "final"
 
 # Get the first/last (n-1)gram and final word.
-if(N != 2){
+if (N != 2) {
   start_ngrams <- unite(seps[, 1:(dim(seps)[2] - 1)], col = "start", sep = " ")
   end_ngrams <- unite(seps[, 2:(dim(seps)[2])], col = "final", sep = " ")
 } else{

@@ -39,7 +39,7 @@ for row = 1:N
 	% if round(sum(P(row, :)), 15) ~= 1
 	% 	end_new_col(row) = 1;
 	% end
-	% 
+	%
 	% if contains(string(ngrams{row, 3}), "NEWLINE")
 	% 	count_newline = count_newline + ngrams{row, 2};
 	% end
@@ -47,7 +47,7 @@ for row = 1:N
 	if contains(string(ngrams{row, 3}), "START")
 		count_start = count_start + ngrams{row, 2};
 	end
-	
+
 end
 
 % Calculate row transitions

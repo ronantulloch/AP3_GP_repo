@@ -48,6 +48,7 @@ phrase = replace(phrase, "ENDLINE NEWLINE", "");
 phrase = replace(phrase, "NEWLINE", "");
 phrase = replace(phrase, "  ", " ");
 phrase = replace(phrase, "START ", "");
-phrase = replace(phrase, "\nFINAL\n", ".\n");
+phrase = replace(phrase, "FINAL", "");
+phrase = replace(phrase, " i ", " I ");
 clc
 fprintf(phrase)
