@@ -13,12 +13,12 @@ for row = 1:N
 		% Get the count of the next ngram and the first word of the ngram.
 		next_ngram_count = ngrams{col, 2};
 		next_ngram_first = string(ngrams{col, 3});
-
+		
 		% Get the last of the next ngram and the count of the last of the
 		% next ngram.
 		current_ngram_last = string(ngrams{row, 4});
 		current_ngram_last_count = ngrams{row, 6};
-
+		
 		% If the ngrams are related then calculate the probability.
 		if next_ngram_first == current_ngram_last
 			P(row, col) = next_ngram_count/current_ngram_last_count;
@@ -43,11 +43,11 @@ for row = 1:N
 	% if contains(string(ngrams{row, 3}), "NEWLINE")
 	% 	count_newline = count_newline + ngrams{row, 2};
 	% end
-
+	
 	if contains(string(ngrams{row, 3}), "START")
 		count_start = count_start + ngrams{row, 2};
 	end
-
+	
 end
 
 % Calculate row transitions
@@ -55,7 +55,7 @@ for row = 1:N
 	% if contains(string(ngrams{row, 3}), "NEWLINE")
 	% 	end_new_row(row) = ngrams{row, 2}/count_newline;
 	% end
-
+	
 	if contains(string(ngrams{row, 3}), "START")
 		p_0(row) = ngrams{row, 2}/count_start;
 	end
