@@ -7,6 +7,7 @@ pacman::p_load(
   tidytext
 )
 
+
 text <- read_file("Raw_Text_Input/Sylvia Plath Poems - Small.txt") |>
   gsub(
     pattern = "- ", replacement = "" #Remove the double newline characters
