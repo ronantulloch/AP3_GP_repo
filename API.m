@@ -1,25 +1,22 @@
-function [syllables, line_syl] = API(text)
-line_syl = [];
+function [syllables, numsyl] = API(text)
+newText=split(text);
+newText=transpose(newText);
+numsyl=[];
+syl=0;
+for i=1:length(newText)
+    if newText(i)=="START"
+    elseif newText(i)== "NEWLINE"
+        numsyl=[numsyl;syl];
+        syl=0;
+    elseif newText(i)=="ENDLINE"
 
-
-i = 1;
-while text(i) ~= "FINAL"
-i = i + 1;
-count = 0;
-while text(i) ~= "NEWLINE"
-	if text(i) == "START"
-	count = count;
-	i=i+1;
-	elseif text(i) == "ENDLINE"
-	count = count;
-	i=i+1;
-	else
-%find a method of counting the number of syllables.
-	count = hyphenate(text(i));
-	i=i+1;
+    elseif newText(i)=="FINAL"
+        numsyl=[numsyl;syl];
+        break;
+    else
+        syl=sylWord(newText(i))+syl;
+        
+    end
 end
-end
-	line_syl = [line_syl, count]
-end
-syllables = sum(line_syl);
+syllables = sum(numsyl);
 end
