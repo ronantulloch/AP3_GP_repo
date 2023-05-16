@@ -1,0 +1,107 @@
+Statistical techniques are employed in almost every phase of life. Surveys are de-
+signed to collect early returns on election day and forecast the outcome of an election.
+Consumers are sampled to provide information for predicting product preferences.
+Research physicians conduct experiments to determine the effect of various drugs and
+controlled environmental conditions on humans in order to infer the appropriate treat-
+ment for various illnesses. Engineers sample a product quality characteristic and var-
+ious controllable process variables to identify key variables related to product quality.
+to ship or hold individual lots. Economists observe various indices of economic health
+over a period of time and use the information to forecast the condition of the economy
+in the future. Statistical techniques play an important role in achieving the objective
+of each of these practical situations. The development of the theory underlying these
+techniques is the focus of this text.
+A prerequisite to a discussion of the theory of statistics is a definition of statis-
+tics and a statement of its objectives. Webster’s New Collegiate Dictionary defines
+statistics as “a branch of mathematics dealing with the collection, analysis, interpre-
+tation, and presentation of masses of numerical data.” Stuart and Ord (1991) state:
+“Statistics is the branch of the scientific method which deals with the data obtained by
+counting or measuring the properties of populations.” Rice (1995), commenting on
+experimentation and statistical applications, states that statistics is “essentially con-
+cerned with procedures for analyzing data, especially data that in some vague sense
+have a random character.” Freund and Walpole (1987), among others, view statistics
+as encompassing “the science of basing inferences on observed data and the entire problem of making decisions in the face of uncertainty.” And Mood, Graybill, and
+Boes (1974) define statistics as “the technology of the scientific method” and add
+that statistics is concerned with “(1) the design of experiments and investigations,
+(2) statistical inference.” A superficial examination of these definitions suggests a
+substantial lack of agreement, but all possess common elements. Each description
+implies that data are collected, with inference as the objective. Each requires select-
+ing a subset of a large collection of data, either existent or conceptual, in order to
+infer the characteristics of the complete set. All the authors imply that statistics is a
+theory of information, with inference making as its objective.
+The large body of data that is the target of our interest is called the population, and
+the subset selected from it is a sample. The preferences of voters for a gubernatorial
+candidate, Jones, expressed in quantitative form (1 for “prefer” and 0 for “do not
+prefer”) provide a real, finite, and existing population of great interest to Jones. To
+determine the true fraction who favor his election, Jones would need to interview
+all eligible voters—a task that is practically impossible. The voltage at a particular
+point in the guidance system for a spacecraft may be tested in the only three sys-
+tems that have been built. The resulting data could be used to estimate the voltage
+characteristics for other systems that might be manufactured some time in the future.
+In this case, the population is conceptual. We think of the sample of three as being
+representative of a large population of guidance systems that could be built using the
+same method. Presumably, this population would possess characteristics similar to
+the three systems in the sample. Analogously, measurements on patients in a medical
+experiment represent a sample from a conceptual population consisting of all patients
+similarly afflicted today, as well as those who will be afflicted in the near future. You
+will find it useful to clearly define the populations of interest for each of the scenarios
+described earlier in this section and to clarify the inferential objective for each.
+It is interesting to note that billions of dollars are spent each year by U.S. indus-
+try and government for data from experimentation, sample surveys, and other data
+collection procedures. This money is expended solely to obtain information about
+phenomena susceptible to measurement in areas of business, science, or the arts. The
+implications of this statement provide keys to the nature of the very valuable contri-
+bution that the discipline of statistics makes to research and development in all areas
+of society. Information useful in inferring some characteristic of a population (either
+existing or conceptual) is purchased in a specified quantity and results in an inference
+(estimation or decision) with an associated degree of goodness. For example, if Jones
+arranges for a sample of voters to be interviewed, the information in the sample can be
+used to estimate the true fraction of all voters who favor Jones’s election. In addition
+to the estimate itself, Jones should also be concerned with the likelihood (chance)
+that the estimate provided is close to the true fraction of eligible voters who favor his
+election. Intuitively, the larger the number of eligible voters in the sample, the higher
+will be the likelihood of an accurate estimate. Similarly, if a decision is made regarding
+the relative merits of two manufacturing processes based on examination of samples
+of products from both processes, we should be interested in the decision regarding
+which is better and the likelihood that the decision is correct. In general, the study of
+statistics is concerned with the design of experiments or sample surveys to obtain a
+specified quantity of information at minimum cost and the optimum use of this infor-
+mation in making an inference about a population. The objective of statistics is to make
+
+@
+
+The mechanism instrumental in making inferences can be well illustrated by analyzing
+our own intuitive inference-making procedures.
+Suppose that two candidates are running for a public office in our community
+and that we wish to determine whether our candidate, Jones, is favored to win. The
+population of interest is the set of responses from all eligible voters who will vote on
+election day, and we wish to determine whether the fraction favoring Jones exceeds .5.
+For the sake of simplicity, suppose that all eligible voters will go to the polls and that
+we randomly select a sample of 20 from the courthouse roster of voters. All 20 are
+contacted and all favor Jones. What do you conclude about Jones’s prospects for
+winning the election?
+There is little doubt that most of us would immediately infer that Jones will win.
+This is an easy inference to make, but this inference itself is not our immediate goal.
+Rather, we wish to examine the mental processes that were employed in reaching this
+conclusion about the prospective behavior of a large voting population based on a
+sample of only 20 people.
+Winning means acquiring more than 50% of the votes. Did we conclude that Jones
+would win because we thought that the fraction favoring Jones in the sample was
+identical to the fraction favoring Jones in the population? We know that this is prob-
+ably not true. A simple experiment will verify that the fraction in the sample favoring
+Jones need not be the same as the fraction of the population who favor him. If a bal-
+anced coin is tossed, it is intuitively obvious that the true proportion of times it will
+turn up heads is .5. Yet if we sample the outcomes for our coin by tossing it 20 times,
+the proportion of heads will vary from sample to sample; that is, on one occasion
+we might observe 12 heads out of 20 flips, for a sample proportion of 12/20 = .6.
+On another occasion, we might observe 8 heads out of 20 flips, for a sample pro-
+portion of 8/20 = .4. In fact, the sample proportion of heads could be 0, .05, .10,
+
+@
+
+Did we conclude that Jones would win because it would be impossible for 20 out
+of 20 sample voters to favor him if in fact less than 50% of the electorate intended to
+vote for him? The answer to this question is certainly no, but it provides the key to
+our hidden line of logic. It is not impossible to draw 20 out of 20 favoring Jones when
+less than 50% of the electorate favor him, but it is highly improbable. As a result, we
+concluded that he would win.
+
