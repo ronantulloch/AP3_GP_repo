@@ -30,11 +30,11 @@ text <- read_file("Raw_Text_Input/Sylvia Plath Poems - Small.txt") |>
   gsub(
     pattern = "--", replacement = " " #Remove the double newline characters
   ) |>
- # removePunctuation(
-#  preserve_intra_word_contractions = FALSE,
- #   preserve_intra_word_dashes = FALSE,
-  #  ucp = FALSE
-#  ) |> #Remove the punctuation
+removePunctuation(
+  preserve_intra_word_contractions = FALSE,
+  preserve_intra_word_dashes = FALSE,
+  ucp = FALSE
+ ) |> #Remove the punctuation
   gsub(
     pattern = "  ", replacement = "" # Remove the tabs
   ) |>

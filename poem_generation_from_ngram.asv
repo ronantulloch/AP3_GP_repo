@@ -73,16 +73,15 @@ while final == false
 			end
 
 			mean_line_syllables = double(mean_syllables(mean_syllables(:,3) == ngram, 5))';
-			if isempty(mean_line_syllables)
-				mean_line_syllables = mean(double(mean_syllables(:,3)));
-			elseif length(mean_line_syllables) > 1
-				mean_line_syllables = mean(mean_line_syllables);
+			if isempty(mean_line_length);
+				mean_line_length = mean(double(mean_syllables(:,3)));
+			elseif length(mean_line_length) > 1
+				mean_line_length = mean(mean_line_length);
 			end
 
 			if (current_line_length <= mean_line_length + 2) && ...
 					(current_line_length >= mean_line_length - 2) && ...
-					(current_syllables <= mean_line_syllables + 2) && ...
-					(current_syllables >= mean_line_syllables - 2)
+					(current_syllables <= mean_line_syllables + 2) 
 				total_phrase = total_phrase + " " +  strtrim(phrase);
 				phrase_words = [];
 				is_valid = true;

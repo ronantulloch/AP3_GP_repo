@@ -1,11 +1,12 @@
 pacman::p_load(
   tidyverse,
   readr,
-  tidytext
+  tidytext,
+  strex
 )
 
 # Set the N for N-grams
-N = 2
+N <- 3
 
 #Clean the text after saving.
 text <- read_file("R_Outputs/output.txt") |>
@@ -16,8 +17,11 @@ text <- read_file("R_Outputs/output.txt") |>
 
 # Place into a dataframe
 text <- text[[1]] |>
+  trimws() |>
   tibble()
 colnames(text) = "text"
+text$poem_length <- str_count(text$text, pattern = "ENDLINE NEWLINE") + 1
+text$n_gram <- str_before_nth(text$text, pattern = " ", N + 1)
 
 # Tokenize the words in the text into (n-1)grams
 prev_ngrams <- text |>
@@ -67,7 +71,6 @@ colnames(n_grams) <- c(
   "final word",
   "num_end_ngram"
 )
-
 
 write_csv(n_grams, "R_outputs/output_ngrams.csv")
 
