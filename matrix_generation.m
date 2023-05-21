@@ -30,20 +30,12 @@ end
 % distribution.
 end_new_col = zeros(N+1, 1);
 end_new_row = zeros(1, N);
-p_0 = zeros(1, N );
+p_0 = zeros(1, N);
 count_newline = 0;
 count_start = 0;
 
 % Calculate column transitions.
-for row = 1:N
-	% if round(sum(P(row, :)), 15) ~= 1
-	% 	end_new_col(row) = 1;
-	% end
-	%
-	% if contains(string(ngrams{row, 3}), "NEWLINE")
-	% 	count_newline = count_newline + ngrams{row, 2};
-	% end
-	
+for row = 1:N	
 	if contains(string(ngrams{row, 3}), "START")
 		count_start = count_start + ngrams{row, 2};
 	end
@@ -52,17 +44,10 @@ end
 
 % Calculate row transitions
 for row = 1:N
-	% if contains(string(ngrams{row, 3}), "NEWLINE")
-	% 	end_new_row(row) = ngrams{row, 2}/count_newline;
-	% end
-	
 	if contains(string(ngrams{row, 3}), "START")
 		p_0(row) = ngrams{row, 2}/count_start;
 	end
 end
-
-% Add these values to P
-% P = [P ; end_new_row]; P = [P, end_new_col];
 
 save("Matlab_Outputs/ngrams.mat", "ngrams")
 save("Matlab_Outputs/P.mat", "P")

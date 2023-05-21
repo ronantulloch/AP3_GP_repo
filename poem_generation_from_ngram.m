@@ -2,10 +2,12 @@
 % it to generate text.
 clc;
 
+% Load the stochastic matrices
 ngrams = load("Matlab_Outputs/ngrams.mat"); ngrams = ngrams.ngrams;
 P = load("Matlab_Outputs/P.mat"); P = P.P;
 p_0 = load("Matlab_Outputs/p_0.mat"); p_0 = p_0.p_0;
 
+% Get the previously computed line length and syllable counts.
 expected_line_length = readcell("R_Outputs\mean_line_lengths.csv");
 expected_line_length = string(expected_line_length(2:end, :));
 mean_syllables = load("Matlab_Outputs/syllables.mat", "lengths");
@@ -14,9 +16,9 @@ mean_syllables = string(mean_syllables.lengths);
 % the n for n-grams, we will default to tri-grams.
 n = 3;
 
+% Some endline setup states
 N = length(p_0);
 rng("shuffle")
-
 ngrams{N, 1} = N;
 ngrams{N, 2} = 'ENDLINE NEWLINE';
 ngrams{N, 4} = 'ENDLINE';
@@ -25,7 +27,6 @@ ngrams{N, end - 1} = 'NEWLINE';
 
 % Initialsise the phrase to be generated.
 starting_word_index = randsample(N, 1, true, p_0);
-
 starting_phrase =  string(ngrams{starting_word_index, 1});
 phrase = starting_phrase;
 phrase_words = split(starting_phrase)';
@@ -33,6 +34,7 @@ total_phrase = "";
 final = false;
 old_word_index = starting_word_index;
 
+% start the generation process
 while final == false
 	is_valid = false;
 	while is_valid == false

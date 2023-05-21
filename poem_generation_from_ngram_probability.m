@@ -2,13 +2,14 @@
 % it to generate text.
 clc;
 
+% Load in the stochastic matric
 ngrams = load("Matlab_Outputs/ngrams.mat"); ngrams = ngrams.ngrams;
 P = load("Matlab_Outputs/P.mat"); P = P.P;
 p_0 = load("Matlab_Outputs/p_0.mat"); p_0 = p_0.p_0;
 
+% Get the mean line length values
 vals = readcell("R_Outputs\row_vals.csv");
-vals = string(expected_line_length);
-
+vals = string(vals(2:end, :));
 num_lines = randsample(double(vals(end,1)), 1, true, double(vals(:,4))');
 
 % the n for n-grams, we will default to tri-grams.
@@ -56,19 +57,21 @@ for i = 1:num_lines
 				+ " "  + phrase_words(3);
 
 			mean_line_length = double(vals(i,3));
-			current_line_length = count(phrase, " ") - 2
+			current_line_length = count(phrase, " ") - 2;
 
-			% if contains(phrase, "START")
-			% 	current_syllables = syllabals(phrase) - 3;
-			% elseif contains(phrase, "FINAL")
-			% 	current_syllables = syllabals(phrase) - 3;
-			% else
-			% 	current_syllables = syllabals(phrase) - 4;
-			% end
+			if contains(phrase, "START")
+				current_syllables = syllabals(phrase) - 3;
+			elseif contains(phrase, "FINAL")
+				current_syllables = syllabals(phrase) - 3;
+			else
+				current_syllables = syllabals(phrase) - 4;
+			end
 			mean_line_syllables = double(vals(i,2));
 
-			if (current_line_length <= mean_line_length + 13) && ...
-					(current_line_length >= mean_line_length - 13) 
+			if (current_line_length <= mean_line_length + 3) && ...
+					(current_line_length >= mean_line_length - 3) && ...
+					(current_syllables <= mean_line_syllables + 5) && ...
+					(current_syllables >= mean_line_syllables - 5)
 				total_phrase = total_phrase + " " +  strtrim(phrase);
 				phrase_words = [];
 				is_valid = true;
